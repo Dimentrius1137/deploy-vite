@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="scss/page.scss">
+</head>
+<body>
+    <header>
+        <div class="logo-cont">
+            <a href="">
+            <img class="logo" src="interface_items/logos/sakura1.png">
+            </a>
+            <div class="site__name">Сакура</div>
+        </div>
+        <div class="menu"> 
+                <div class="drop_menu">
+                    <ul class="list">
+                        <li><button>Log In</button></li>
+                        <li><a href="index.html">Главная</a><div class="bottom-line"></div> </li>
+                        <li><a href="search.html">Фильтры</a><div class="bottom-line"></div></li>
+                        <li>О нас<div class="bottom-line"></div></li>
+                    </ul>
+                </div>
+
+            </div>
+        <div class="profile">
+            <div class="switch_menu">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <button>Log In<div class="bottom-line"></div></button>
+        </div>
+
+    </header>
+    <div class="container">
+        <h1>Page</h1>
+            <div class="inner_container">
+                <div class="block1">
+                    <img class="poster" src="" alt="">
+                    <div class="rating_KP">
+                        КП
+                        <span class="rating"></span>
+                    </div>
+                </div>
+            
+                    <div class="block2">
+                        <div class="description"></div>
+                </div>
+            </div>
+    </div>
+    <footer>
+        <div class="row">
+            <div class="section footer__desc">
+                <div class="footer__title">Кинотеатр "Сакура"</div>
+                <p>Это онлайн кинотеатр и пятое, десятое что здесь обычно пишут</p>
+            </div>
+            <div class="section footer__contacts">
+                <div class="footer__title">Контакты</div>
+                <ul class="footer__contacts__list">
+                    <li>Россия г. Ярославль</li>
+                    <li>Улица... дом...</li>
+                    <li>Индекс: 000000</li>
+                </ul>
+                <div class="email">example@mail.ru</div>
+                <div class="phone"> 8 800 555 45 25</div>
+            </div>
+            <div class="section footer__links">
+                <div class="footer__title">Ссылки</div>
+                <ul class="footer__links__list">
+                    <li><a href="">Главная</a></li>
+                    <li><a href="">О нас</a></li>
+                    <li><a href="">Новости</a></li>
+                    <li><a href="">Проекты</a></li>
+                    <li><a href="">Команда</a></li>
+                </ul>
+            </div>
+            <div class="section footer__social">
+                <div class="footer__title">Мы в социальных сетях</div>
+                <div class="footer__social__icons">
+                    <a href="https://github.com/Dimentrius1137">
+                        <img src="interface_items/github.png">
+                    </a>
+                    <a href="#">
+                        <img src="interface_items/vk.png">
+                    </a>
+    
+                </div>
+            </div>
+        </div>
+        
+    </footer> 
+    <script>
+        const container = document.querySelector('.container')
+        const arrow = document.querySelector('.top-arrow');
+        const dropMenu = document.querySelector('.list-hide');
+        const titleName = document.querySelector('h1');
+        const poster = document.querySelector('.poster');
+        const ratingKP = document.querySelector('.rating');
+        const desc = document.querySelector('.description');
+        let _none_poster = "interface_items/none_pic.png"
+        let loadSpinner = document.createElement('div');
+        let spinner = document.createElement('div');
+
+        function Hide_DropMenu()
+{
+    dropMenu.classList.toggle("list");
+    arrow.classList.toggle("top-arrow-up");
+}
+        function Loading()
+        {
+
+            loadSpinner.classList.add("loading");
+            container.appendChild(loadSpinner);
+            spinner.classList.add("spinner");
+            loadSpinner.appendChild(spinner);
+        }
+        Loading()
+
+        let URLcontent = (new URL(document.location)).searchParams;
+        const url = `https://api.kinopoisk.dev/v1.4/movie/search?page=1&limit=1&query=${encodeURI(URLcontent.get("name"))}`;
+        async function GetData(){
+            try{
+                const data = await fetch(url, { headers: { 'X-API-KEY': 'WR46T4C-A2MMNGP-MX8DMH3-A160B0X' } });
+                const info = await data.json();
+                console.log(info);
+                ratingKP.innerHTML = Math.round(info.docs[0].rating.kp * 10) / 10;
+                desc.innerHTML = info.docs[0].description
+                poster.src = info.docs[0].poster.url;
+                titleName.innerHTML = URLcontent.get("name");
+                poster.src =  info.docs[0].poster.previewUrl || info.docs[0].poster.url;
+                if(info.docs[0].poster.url == null && info.docs[0].poster.previewUrl == null)
+                {
+                    poster.src = _none_poster;
+                }
+                if(info.docs[0].description == "")
+                {
+                    desc.style.display = "none"
+                }
+            }
+            catch(er){
+                console.log(er);
+                poster.src = _none_poster;
+                titleName.innerHTML = "Тут название";
+                desc.innerHTML = "Тут описание"
+            }
+            loadSpinner.remove();
+        }
+        GetData()
+
+
+    </script>
+</body>
+</html>
