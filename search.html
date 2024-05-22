@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="scss/search_styles.scss">
+    <link rel="stylesheet" href="scss/search.scss">
     <link rel="stylesheet" href="libs/nouislider.min.css">
     <link rel="stylesheet" href="libs/range_styles.css">
 </head>
@@ -31,7 +31,7 @@
 
             </div>
         <div class="profile">
-            <div class="switch_menu">
+            <div class="switch_menu" onclick="Open()">
                 <div></div>
                 <div></div>
                 <div></div>
@@ -41,7 +41,7 @@
 
     </header>
     <main>
-        <div class="scroll_to_start" onclick="ScrollToStart()">
+        <div class="scroll_to_start" onclick="ScrollToStart()"> 
             <img src="interface_items/start-arrow.png">
         </div>
         <div class="search__container">
@@ -229,9 +229,10 @@
         </div>
         
     </footer> 
+    <script type="module" src="js/search.js"></script>
+    <script type="module" src="js/particles.js"></script>
     <script src="libs/nouislider.min.js"></script>
-    <script src="js/search.js"></script>
-    <script src="js/particles.js"></script>
+
 
 </body>
 </html>

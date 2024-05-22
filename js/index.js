@@ -1,3 +1,4 @@
+
 const search_list = document.querySelector('.search__list');
 const search_field = document.querySelector('input');
 const state_btn = document.querySelector('.button_state');
@@ -8,7 +9,6 @@ const startBtn = document.querySelector('.scroll-to-start');
 const loup = document.querySelector('.loup');
 const switch_menu = document.querySelector('.switch_menu');
 const drop_menu = document.querySelector('.drop_menu')
-
 
 const search__url = "https://api.kinopoisk.dev/v1.4/movie/search?&query";
 search_field.addEventListener('input', async (field) => {
@@ -83,7 +83,7 @@ loup.addEventListener('click', () => {
 
 
 //режим списком
-let _none_poster = "interface_items/none_pic.png"
+let _none_poster = "../interface_items/none_pic.png"
 const catalog = document.querySelector('#cat');
 const moreBtn = document.querySelector('.more');
 const menu_content = document.querySelector('.menu_content');
@@ -105,11 +105,11 @@ list_btn.addEventListener('click', () => {
         el.classList.toggle(('list_mode'));  
         if(el.classList.contains('list_mode'))
         {
-            list_btn.src = "interface_items/grid.png"
+            list_btn.src = "../interface_items/grid.png"
             el.children[2].style.display = "block"
         }  
         else{
-            list_btn.src = "interface_items/list.png"
+            list_btn.src = "../interface_items/list.png"
             el.children[2].style.display = "none"
         }
 })
@@ -144,6 +144,7 @@ function CreateCards()
     //загрузка
     let loadSpinner = document.createElement('div');
     let spinner = document.createElement('div');
+    const leaf__fall = document.querySelector('.leaf__fall');
     function Loading()
     {
         leaf__fall.style.zIndex = "4";

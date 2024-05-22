@@ -2,6 +2,7 @@ const filter__bar = document.querySelector('.selector_menu');
 const select__windows = document.querySelectorAll('.selector');
 const range = document.getElementById('range');
 const slider_range = document.querySelectorAll('.slider-range');
+
 filter__bar.addEventListener('click', (el)=> {
     const switch__el = el.target.parentElement;
     if(switch__el.classList.contains('open') && el.target.tagName == "SPAN")
@@ -46,7 +47,7 @@ function CreateCards()
 
 
 const search__url = "https://api.kinopoisk.dev/v1.4/movie/search?&query";
-const _none_poster = "interface_items/none_pic.png";
+const _none_poster = "../interface_items/none_pic.png";
 search.addEventListener('input', async (field) => {
     catalog.innerHTML = "";
 
@@ -91,7 +92,7 @@ filter__bar.addEventListener('change', (el) => {
                 }
             
                 filtersArray.forEach((tag) => {
-                    filtersContainer.innerHTML += `<span class="tag">${tag}<img class="remove" src="interface_items/cancel.svg"><span>`;
+                    filtersContainer.innerHTML += `<span class="tag">${tag}<img class="remove" src="../interface_items/cancel.svg"><span>`;
                 })
                 queryString = queryArray.join('&')
             
